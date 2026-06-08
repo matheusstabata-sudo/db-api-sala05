@@ -1,0 +1,45 @@
+import s from './App.module.css'
+import { useEffect, useState } from 'react'
+import { api } from './constants/api'
+
+import logo from '/dblogo.webp'
+import { Card } from './components/card'
+
+function App() {
+  const [data, setData] = useState([])
+  const [page, setPage] = useState()
+  const [inputPage, setInputPage] = useState("")
+
+
+  useEffect(() => {
+   const carrega = async () => {
+    try{
+      const response = await api.get(`/characters?page=${page}`)
+      setData(response.data.items)
+    }catch{
+      console.error("Deu ruim!!!")
+    }
+   }
+   carrega()
+  }, [page])
+  
+  return (
+    <>
+      <img className={s.logo} src={logo} alt="Logo" />
+    <div className="botao">
+      <label>Digite uma página</label>
+      <input min={1} max={42} type="number" placeholder='1/42' value={inputPage} onChange={(e) => setInputPage(e.target.value)}/>
+      <button onClick={() => setPage(Number(inputPage))}>BUSCAR</button>
+    </div>
+      <main>
+        {data.map(item => {
+          return(
+           <Card unico={item.id} imagem={item.image} nome={item.name} especie={item.species} ki={item.ki} maxki={item.maxKi} raca={item.race} genero={item.gender} afiliacao={item.affiliation}/>
+          )
+        })}
+      </main>
+    </>
+  )
+}
+
+export default App

@@ -1,0 +1,37 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+  background-image: url('/dbimage.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+main{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction:row  ;
+  align-items: start;
+  justify-content: left;
+  gap: 50px;
+  color: aliceblue;
+}
+
+@media (width <= 1000px){
+  body{
+  background-image: url('/papel-db-1.jpg');
+}
+}
+div{
+  color: aliceblue;
+}
+button{
+  border-radius: 999px;
+  height: 30px;
+}
